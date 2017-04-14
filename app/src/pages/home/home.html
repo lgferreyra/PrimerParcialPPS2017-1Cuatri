@@ -5,5 +5,13 @@
 </ion-header>
 
 <ion-content padding>
-  <button ion-button color="danger" block>Jugar</button>
+
+  <form #jugarForm="ngForm" (ngSubmit)="jugar()">
+    <ion-item>
+      <ion-label color="primary">Nombre:</ion-label>
+      <ion-input [(ngModel)]="nombre" name="nombre" type=text required minlength="3"></ion-input>
+    </ion-item>
+    <button ion-button block type="submit" [disabled]="!jugarForm.form.valid">Jugar</button>
+  </form>
+
 </ion-content>

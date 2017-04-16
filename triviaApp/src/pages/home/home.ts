@@ -20,4 +20,8 @@ nombre : string;
     let player: Jugador = new Jugador(this.nombre);
     this.navCtrl.push(TriviaPreguntaPage, {jugador: player, pregunta: 1});
   }
+
+  ionViewDidEnter() {
+    this.nombre = "";
+  }
 }

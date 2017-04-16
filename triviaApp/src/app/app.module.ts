@@ -8,9 +8,11 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TriviaPreguntaPage } from "../pages/trivia-pregunta/trivia-pregunta";
+import { Pregunta } from "../entity/pregunta";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Vibration } from "@ionic-native/vibration";
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    Vibration,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

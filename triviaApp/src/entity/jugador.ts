@@ -21,10 +21,12 @@ export class Jugador{
   }
 
   triviaWin() {
+    console.log("Correcto!");
     this.win++;
   }
 
   triviaLose() {
+    console.log("Dedicate a otra cosa");
     this.lose++;
   }
 

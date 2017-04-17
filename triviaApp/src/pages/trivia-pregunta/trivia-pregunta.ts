@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+
 import { Jugador } from "../../entity/jugador";
 import { Pregunta } from "../../entity/pregunta";
+
 import { Vibration } from "@ionic-native/vibration";
+
+import { Resumen } from "../resumen/resumen";
 
 /**
  * Generated class for the TriviaPregunta page.
@@ -23,10 +27,6 @@ export class TriviaPreguntaPage implements OnInit {
   pregunta : Pregunta = new Pregunta();
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public vibration: Vibration) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TriviaPregunta');
   }
 
   ngOnInit(){
@@ -53,15 +53,13 @@ export class TriviaPreguntaPage implements OnInit {
         this.pregunta.loadPregunta(this.pregunta.getPreguntas().preguntas.pregunta1);
         break;
     }
+
+    console.log(this.pregunta);
   }
 
   next(){
     this.vibrar(500);
-    if(this.respuesta == this.pregunta.correcta){
-      this.player.triviaWin();
-    } else {
-      this.player.triviaLose();
-    }
+    this.resolveTrivia();
     this.navCtrl.push(TriviaPreguntaPage, {jugador: this.player, pregunta: this.preguntaNumero + 1});
   }
 
@@ -71,12 +69,20 @@ export class TriviaPreguntaPage implements OnInit {
   }
 
   finish(){
-    console.log("Mostramos resumen");
     this.vibrar(1000);
-    //this.navCtrl.push(null);
+    this.resolveTrivia();
+    this.navCtrl.push(Resumen, {jugador: this.player});
   }
 
   private vibrar(miliseconds: number){
     this.vibration.vibrate(miliseconds);
+  }
+
+  resolveTrivia(){
+    if(this.respuesta == this.pregunta.correcta){
+      this.player.triviaWin();
+    } else {
+      this.player.triviaLose();
+    }
   }
 }

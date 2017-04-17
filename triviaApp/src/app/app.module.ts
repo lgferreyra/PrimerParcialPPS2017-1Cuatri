@@ -8,7 +8,9 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TriviaPreguntaPage } from "../pages/trivia-pregunta/trivia-pregunta";
-import { Pregunta } from "../entity/pregunta";
+import { Resumen } from "../pages/resumen/resumen";
+
+import { TriviaService } from "../providers/triviaService";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -21,7 +23,8 @@ import { Vibration } from "@ionic-native/vibration";
     ContactPage,
     HomePage,
     TabsPage,
-    TriviaPreguntaPage
+    TriviaPreguntaPage,
+    Resumen
   ],
   imports: [
     BrowserModule,
@@ -34,12 +37,14 @@ import { Vibration } from "@ionic-native/vibration";
     ContactPage,
     HomePage,
     TabsPage,
-    TriviaPreguntaPage
+    TriviaPreguntaPage,
+    Resumen
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Vibration,
+    TriviaService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

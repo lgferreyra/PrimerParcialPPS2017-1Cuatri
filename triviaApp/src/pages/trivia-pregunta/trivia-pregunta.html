@@ -7,8 +7,8 @@
 <ion-header>
 
   <ion-navbar hideBackButton>
-    <ion-title>Pregunta Nº{{preguntaNumero}}</ion-title>
-    <ion-title class="player">{{player.getName()}}</ion-title>
+    <ion-title>Pregunta Nº{{preguntaNumero}} <ion-title class="player">{{player.getName()}}</ion-title></ion-title>
+    
   </ion-navbar>
 
 </ion-header>
@@ -27,12 +27,12 @@
         <ion-radio value="2"></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label>{{pregunta.opcion1}}</ion-label>
+        <ion-label>{{pregunta.opcion3}}</ion-label>
         <ion-radio value="3"></ion-radio>
       </ion-item>
     </ion-list>
     <button ion-button type="button" color="danger" (click)="quit()">Salir</button>
-    <button ion-button type="submit" [disabled]="!triviaForm.form.valid" *ngIf="preguntaNumero<3">Siguente</button>
-    <button ion-button type="button" color="secondary" (click)="finish()" [disabled]="!triviaForm.form.valid" *ngIf="preguntaNumero==3">Finalizar</button>
+    <button ion-button type="submit" [disabled]="!triviaForm.form.valid" *ngIf="preguntaNumero<3" class="derecha">Siguente</button>
+    <button ion-button type="button" color="secondary" (click)="finish()" [disabled]="!triviaForm.form.valid" *ngIf="preguntaNumero==3" class="derecha">LLegada</button>
   </form>
 </ion-content>

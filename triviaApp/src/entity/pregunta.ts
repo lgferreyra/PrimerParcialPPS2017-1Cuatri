@@ -27,7 +27,7 @@ export class Pregunta {
                     opciones : {
                         opcion1 : "1024 GB",
                         opcion2 : "1000 GB",
-                        opcion3 : "10000024 GB",
+                        opcion3 : "1000000 GB",
                     },
                     correcta : 1,
                 },

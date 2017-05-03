@@ -24,10 +24,14 @@
       <p text-center>{{mensaje}}</p>
       <ion-row>
         <ion-col>
-          <ion-icon name="checkmark" color="secondary"></ion-icon>{{player.getWins()}}
+          <ion-item>
+            <ion-icon name="checkmark" color="secondary"></ion-icon><span>{{player.getWins()}}</span>
+          </ion-item>
         </ion-col>
         <ion-col>
-          <ion-icon name="close" color="danger"></ion-icon>{{player.getLose()}}
+          <ion-item>
+            <ion-icon name="close" color="danger"></ion-icon><span>{{player.getLose()}}</span>
+          </ion-item>
         </ion-col>
       </ion-row>
     </ion-card-content>

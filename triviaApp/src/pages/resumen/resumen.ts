@@ -42,7 +42,7 @@ export class Resumen implements OnInit {
     } else if (this.player.getWins()==1) {
       this.mensaje = "Mala suerte";
     } else {
-      this.mensaje = "Deberías dedicarte a programar solamente";
+      this.mensaje = "Programar te está haciendo mal";
     }
   }
 }

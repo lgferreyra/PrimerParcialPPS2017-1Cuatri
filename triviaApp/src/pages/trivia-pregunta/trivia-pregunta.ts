@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { Jugador } from "../../entity/jugador";
 import { Pregunta } from "../../entity/pregunta";
+import { TriviaService } from "../../providers/triviaService";
 
 import { Vibration } from "@ionic-native/vibration";
 
@@ -26,7 +27,7 @@ export class TriviaPreguntaPage implements OnInit {
   preguntaNumero : number;
   pregunta : Pregunta = new Pregunta();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public vibration: Vibration) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public vibration: Vibration, public service: TriviaService) {
   }
 
   ngOnInit(){
@@ -37,7 +38,6 @@ export class TriviaPreguntaPage implements OnInit {
     //Elijo la pregunta segun el parametro obtenido de Nº de pregunta
     switch (this.preguntaNumero) {
       case 1:
-        console.log(this.preguntaNumero);
         this.pregunta.loadPregunta(this.pregunta.getPreguntas().preguntas.pregunta1);
         break;
 
@@ -54,7 +54,7 @@ export class TriviaPreguntaPage implements OnInit {
         break;
     }
 
-    console.log(this.pregunta);
+    //console.log(this.pregunta);
   }
 
   next(){
@@ -71,7 +71,15 @@ export class TriviaPreguntaPage implements OnInit {
   finish(){
     this.vibrar(1000);
     this.resolveTrivia();
-    this.navCtrl.push(Resumen, {jugador: this.player});
+    console.log(this.player);
+    this.service.saveScore(this.player).subscribe(
+      response=>{
+        console.log(response);
+        this.navCtrl.push(Resumen, {jugador: this.player});
+      }
+      , error=>console.error(error)
+    );
+
   }
 
   private vibrar(miliseconds: number){

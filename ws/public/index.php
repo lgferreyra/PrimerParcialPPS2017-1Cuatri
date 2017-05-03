@@ -4,8 +4,17 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require '../vendor/autoload.php';
 require '../clases/Personas.php';
+require '../clases/Trivia.php';
 
-$app = new \Slim\App;
+
+$configuration = [
+    'settings' => [
+        'displayErrorDetails' => true,
+    ],
+];
+$c = new \Slim\Container($configuration);
+$app = new \Slim\App($c);
+
 $app->get('/hello/{name}', function (Request $request, Response $response) {
     $name = $request->getAttribute('name');
     $response->getBody()->write("Hello, $name");
@@ -13,12 +22,18 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
     return $response;
 });
 
-$app->get('/persona/{id}', function(Request $request, Response $response){
-	$persona = Persona::TraerUnaPersona($request->getAttribute('id'));
-	$personaJson = json_encode($persona);
-	$response->getBody()->write($personaJson);
+$app->get('/scores/', function (Request $request, Response $response) {
+	$json = json_encode(Trivia::getScores());
+    $response->getBody()->write($json);
 
-	var_dump($request->getHeaders());
+    return $response;
+});
+
+$app->post('/scores/insert/', function(Request $request, Response $response){
+	$score = $request->getParsedBody();
+	var_dump($score);
+	$id = json_encode(Trivia::saveScore($score));
+	$response->getBody()->write($id);
 	
 	return $response;
 });

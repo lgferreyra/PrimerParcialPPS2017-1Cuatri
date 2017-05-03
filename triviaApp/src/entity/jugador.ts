@@ -1,12 +1,18 @@
 export class Jugador{
 
+  private id : number;
   private nombre: string;
   private win: number=0;
   private lose: number=0;
 
-  constructor(nombre : string){
+  constructor(nombre : string, win?: number, lose?: number){
     this.nombre = nombre;
+    if(win!=null){
+      this.win = win;
+      this.lose = lose;
+    }
   }
+  
 
   getName() : string{
     return this.nombre;
@@ -28,6 +34,10 @@ export class Jugador{
   triviaLose() {
     console.log("Dedicate a otra cosa");
     this.lose++;
+  }
+
+  setId(id: number):void{
+    this.id = id;
   }
 
 }

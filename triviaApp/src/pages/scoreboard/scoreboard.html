@@ -1,0 +1,25 @@
+<!--
+  Generated template for the Scoreboard page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Resultados</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let item of scores">
+      <ion-icon name="checkmark" color="secondary" item-right></ion-icon><ion-badge color="secondary" item-right>{{item.win}}</ion-badge>
+      {{item.nombre}}
+      <ion-icon name="close" color="danger" item-right></ion-icon><ion-badge color="danger" item-right>{{item.lose}}</ion-badge>
+    </ion-item> 
+  </ion-list>
+  <ion-item *ngIf="scores.length==0">No hay resultados guardados</ion-item>
+</ion-content>

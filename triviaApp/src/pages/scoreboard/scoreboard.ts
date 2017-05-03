@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Jugador } from "../../entity/jugador";
 import { TriviaService } from "../../providers/triviaService";
@@ -13,7 +13,7 @@ import { TriviaService } from "../../providers/triviaService";
   selector: 'page-scoreboard',
   templateUrl: 'scoreboard.html',
 })
-export class Scoreboard implements OnInit {
+export class Scoreboard {
 
   scores: Jugador[] = [];
 
@@ -24,7 +24,7 @@ export class Scoreboard implements OnInit {
     console.log('ionViewDidLoad Scoreboard');
   }
 
-  ngOnInit(){
+  ionViewWillEnter() {
     this.service.getScores().subscribe(
       scores => {
         console.log(scores);
@@ -33,7 +33,7 @@ export class Scoreboard implements OnInit {
       error=>{
         console.error(error);
       }
-    )
+    );
   }
 
 }

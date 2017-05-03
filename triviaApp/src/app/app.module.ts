@@ -12,7 +12,7 @@ import { Scoreboard } from "../pages/scoreboard/scoreboard";
 
 import { TriviaService } from "../providers/triviaService";
 
-import { HttpModule, Http } from '@angular/http';
+import { HttpModule } from '@angular/http';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';

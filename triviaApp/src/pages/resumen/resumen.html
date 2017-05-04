@@ -34,6 +34,12 @@
           </ion-item>
         </ion-col>
       </ion-row>
+      <b>Respuestas</b>
+      <ul>
+        <li *ngFor="let respuesta of player.getLastRespuestas(); let i = index">
+            <p>{{i+1}} - {{respuesta}}</p>
+        </li>
+      </ul>
     </ion-card-content>
 
   </ion-card>

@@ -4,6 +4,7 @@ export class Jugador{
   private nombre: string;
   private win: number=0;
   private lose: number=0;
+  private lastRespuestas: string[] = [];
 
   constructor(nombre : string, win?: number, lose?: number){
     this.nombre = nombre;
@@ -26,13 +27,15 @@ export class Jugador{
     return this.lose;
   }
 
+  getLastRespuestas() : string[]{
+    return this.lastRespuestas;
+  }
+
   triviaWin() {
-    console.log("Correcto!");
     this.win++;
   }
 
   triviaLose() {
-    console.log("Dedicate a otra cosa");
     this.lose++;
   }
 
@@ -40,4 +43,9 @@ export class Jugador{
     this.id = id;
   }
 
+  addRespuesta(respuesta: string){
+    console.log(respuesta);
+    this.lastRespuestas.push(respuesta);
+    console.log(this.lastRespuestas);
+  }
 }

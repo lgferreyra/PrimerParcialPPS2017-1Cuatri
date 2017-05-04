@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Jugador } from "../../entity/jugador";
 import { TriviaService } from "../../providers/triviaService";
 
@@ -17,7 +17,7 @@ export class Scoreboard {
 
   scores: Jugador[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public service: TriviaService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public service: TriviaService, public loadCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -25,6 +25,8 @@ export class Scoreboard {
   }
 
   ionViewWillEnter() {
+    let loading = this.loadCtrl.create({content: 'Cargando...'});
+    loading.present();
     this.service.getScores().subscribe(
       scores => {
         console.log(scores);
@@ -32,7 +34,8 @@ export class Scoreboard {
       } ,
       error=>{
         console.error(error);
-      }
+      } ,
+      ()=>loading.dismiss()
     );
   }
 

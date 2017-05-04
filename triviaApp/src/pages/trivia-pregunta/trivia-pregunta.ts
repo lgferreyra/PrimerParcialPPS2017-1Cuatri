@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { Jugador } from "../../entity/jugador";
 import { Pregunta } from "../../entity/pregunta";
@@ -26,8 +26,11 @@ export class TriviaPreguntaPage implements OnInit {
   respuesta : number;
   preguntaNumero : number;
   pregunta : Pregunta = new Pregunta();
+  respuestas : string[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public vibration: Vibration, public service: TriviaService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+   public vibration: Vibration, public service: TriviaService, public loadCtrl: LoadingController) {
+
   }
 
   ngOnInit(){
@@ -60,6 +63,7 @@ export class TriviaPreguntaPage implements OnInit {
   next(){
     this.vibrar(500);
     this.resolveTrivia();
+    this.saveRespuesta();
     this.navCtrl.push(TriviaPreguntaPage, {jugador: this.player, pregunta: this.preguntaNumero + 1});
   }
 
@@ -71,13 +75,16 @@ export class TriviaPreguntaPage implements OnInit {
   finish(){
     this.vibrar(1000);
     this.resolveTrivia();
-    console.log(this.player);
+    this.saveRespuesta();
+    let loading = this.loadCtrl.create({content: 'Cargando...'});
+    loading.present();
     this.service.saveScore(this.player).subscribe(
       response=>{
         console.log(response);
         this.navCtrl.push(Resumen, {jugador: this.player});
       }
       , error=>console.error(error)
+      , ()=>loading.dismiss()
     );
 
   }
@@ -91,6 +98,25 @@ export class TriviaPreguntaPage implements OnInit {
       this.player.triviaWin();
     } else {
       this.player.triviaLose();
+    }
+  }
+
+  saveRespuesta(){
+    switch (Number.parseInt(this.respuesta.toString())) {
+      case 1:
+        this.player.addRespuesta(this.pregunta.opcion1);
+        break;
+
+      case 2:
+        this.player.addRespuesta(this.pregunta.opcion2);
+        break;
+
+      case 3:
+        this.player.addRespuesta(this.pregunta.opcion3);
+        break;
+    
+      default:
+        break;
     }
   }
 }

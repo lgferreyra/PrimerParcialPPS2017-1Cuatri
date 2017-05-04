@@ -19,15 +19,15 @@
     <h3>{{pregunta.pregunta}}</h3>
     <ion-list radio-group [(ngModel)]="respuesta" name="respuesta" required>
       <ion-item>
-        <ion-label>{{pregunta.opcion1}}</ion-label>
+        <ion-label>A. {{pregunta.opcion1}}</ion-label>
         <ion-radio value="1"></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label>{{pregunta.opcion2}}</ion-label>
+        <ion-label>B. {{pregunta.opcion2}}</ion-label>
         <ion-radio value="2"></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label>{{pregunta.opcion3}}</ion-label>
+        <ion-label>C. {{pregunta.opcion3}}</ion-label>
         <ion-radio value="3"></ion-radio>
       </ion-item>
     </ion-list>

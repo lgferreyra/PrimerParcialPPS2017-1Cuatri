@@ -1,13 +1,13 @@
 <?php
 require_once"AccesoDatos.php";
-class Trivia
+class Ppt
 {
 //--------------------------------------------------------------------------------//
 //--ATRIBUTOS
 	public $id;
 	public $nombre;
- 	public $win;
-  	public $lose;
+ 	public $resultado;
+  	public $fecha;
 	
 
 //--------------------------------------------------------------------------------//
@@ -27,7 +27,7 @@ class Trivia
 //--TOSTRING	
   	public function ToString()
 	{
-	  	return $this->id."-".$this->nombre."-".$this->win."-".$this->lose;
+	  	return $this->id."-".$this->nombre."-".$this->resultado."-".$this->fecha;
 	}
 //--------------------------------------------------------------------------------//
 
@@ -37,10 +37,10 @@ class Trivia
 	public static function getScores()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM trivia");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM ppt");
 		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerTodasLasPersonas() ");
 		$consulta->execute();			
-		$arrScores= $consulta->fetchAll(PDO::FETCH_CLASS, "trivia");	
+		$arrScores= $consulta->fetchAll(PDO::FETCH_CLASS, "ppt");	
 		return $arrScores;
 	}
 
@@ -51,10 +51,9 @@ class Trivia
 	public static function saveScore($score)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO trivia (nombre,win,lose) VALUES (:nombre,:win,:lose)");
+		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO ppt (nombre,resultado) VALUES (:nombre,:resultado)");
 		$consulta->bindValue(':nombre',$score["nombre"], PDO::PARAM_STR);
-        $consulta->bindValue(':win', $score["win"], PDO::PARAM_INT);
-        $consulta->bindValue(':lose', $score["lose"], PDO::PARAM_INT);
+        $consulta->bindValue(':resultado', $score["resultado"], PDO::PARAM_STR);
 		$consulta->execute();		
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	

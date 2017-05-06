@@ -1,0 +1,62 @@
+<!--
+  Generated template for the PptPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-title>Juego<ion-title class="player">{{jugador.getName()}}</ion-title></ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header text-center>
+      Piedra, papel o tijera?
+    </ion-card-header>
+    <ion-card-content>
+      <p>Seleccione una opción para jugar</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <img class="{{piedraStyle}}" width="80%" height="80%" src="img/piedra_left.jpg" (click)="resolverJuego('piedra')"/>
+      </ion-col>
+      <ion-col>
+        <img class="{{papelStyle}}" width="80%" height="80%" src="img/papel_left.jpg" (click)="resolverJuego('papel')"/>
+      </ion-col>
+      <ion-col>
+        <img class="{{tijeraStyle}}" width="80%" height="80%" src="img/tijera_left.jpg" (click)="resolverJuego('tijera')"/>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        
+      </ion-col>
+      <ion-col>
+        <img width="80%" height="80%" src="{{srcMaquina}}"/>
+      </ion-col>
+      <ion-col>
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card *ngIf="resultado!=null">
+    <ion-card-header text-center>
+      Resultado
+    </ion-card-header>
+    <ion-card-content text-center>
+      <b>{{mensaje}}</b>
+      <ion-item>
+        <button ion-button block (click)="saveResult()">Salir y guardar</button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  
+</ion-content>

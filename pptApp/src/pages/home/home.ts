@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, MenuController } from 'ionic-angular';
 
 import { LobbyPage } from "../lobby-page/lobby-page";
+import { Jugador } from "../../entity/jugador";
+import { PptService } from "../../providers/ppt-service";
 
 @Component({
   selector: 'page-home',
@@ -9,17 +11,20 @@ import { LobbyPage } from "../lobby-page/lobby-page";
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public menuCtrl: MenuController) {
+  nombre: string;
+
+  constructor(public navCtrl: NavController, public menuCtrl: MenuController, public pptSrv: PptService) {
 
   }
 
-  ionViewDidLoad(){
+  ionViewWillEnter(){
     this.menuCtrl.enable(false);
+    this.nombre = "";
   }
 
   registrar(){
     this.menuCtrl.enable(true);
-    this.navCtrl.setRoot(LobbyPage);
-    console.info(this.navCtrl.getViews());
+    this.pptSrv.setJugador(new Jugador(this.nombre));
+    this.navCtrl.push(LobbyPage);
   }
 }

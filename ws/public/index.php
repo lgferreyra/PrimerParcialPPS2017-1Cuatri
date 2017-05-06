@@ -5,6 +5,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require '../vendor/autoload.php';
 require '../clases/Personas.php';
 require '../clases/Trivia.php';
+require '../clases/Ppt.php';
 
 
 $configuration = [
@@ -33,6 +34,21 @@ $app->post('/scores/insert/', function(Request $request, Response $response){
 	$score = $request->getParsedBody();
 	var_dump($score);
 	$id = json_encode(Trivia::saveScore($score));
+	$response->getBody()->write($id);
+	
+	return $response;
+});
+
+$app->get('/ppt/', function (Request $request, Response $response) {
+	$json = json_encode(Ppt::getScores());
+    $response->getBody()->write($json);
+
+    return $response;
+});
+
+$app->post('/ppt/insert/', function(Request $request, Response $response){
+	$score = $request->getParsedBody();
+	$id = json_encode(Ppt::saveScore($score));
 	$response->getBody()->write($id);
 	
 	return $response;

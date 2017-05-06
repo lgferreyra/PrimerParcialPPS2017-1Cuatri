@@ -1,4 +1,4 @@
-<ion-menu [content]="content">
+<ion-menu [content]="content" persistent>
   <ion-header>
     <ion-toolbar>
       <ion-title>Menu</ion-title>
@@ -9,6 +9,18 @@
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
+      </button>
+      <button menuClose ion-item (click)="openScore('W')">
+        10 últimas ganadas
+      </button>
+      <button menuClose ion-item (click)="openScore('L')">
+        10 últimas perdidas
+      </button>
+      <button menuClose ion-item (click)="openScore('T')">
+        10 últimas empatadas
+      </button>
+      <button menuClose ion-item (click)="salir()">
+        Cambiar de jugador
       </button>
     </ion-list>
   </ion-content>

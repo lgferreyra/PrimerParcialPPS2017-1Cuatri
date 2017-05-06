@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+
+import { PptService } from "../../providers/ppt-service";
+import { Jugador } from "../../entity/jugador";
+import { PptPage } from "../ppt-page/ppt-page";
 
 /**
  * Generated class for the LobbyPage page.
@@ -11,13 +15,20 @@ import { NavController, NavParams } from 'ionic-angular';
   selector: 'page-lobby-page',
   templateUrl: 'lobby-page.html',
 })
-export class LobbyPage {
+export class LobbyPage implements OnInit {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  jugador: Jugador;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public pptSrv: PptService) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LobbyPage');
+  ngOnInit(){
+    if(this.jugador==null){
+      this.jugador = this.pptSrv.getJugador();
+    }
   }
 
+  jugar(){
+    this.navCtrl.push(PptPage, {jugador: this.jugador});
+  }
 }

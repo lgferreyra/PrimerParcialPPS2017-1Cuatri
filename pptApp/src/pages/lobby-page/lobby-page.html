@@ -5,15 +5,21 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Lobby</ion-title>
+    <ion-title>Lobby<ion-title class="player">{{jugador.getName()}}</ion-title></ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-grid fixed class="centrar">
+    <ion-row>
+      <ion-col>
+        <button ion-button block (click)="jugar()">Jugar</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
